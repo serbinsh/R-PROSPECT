@@ -1,14 +1,15 @@
 Package: Rprospect
 Type: Package
 Title: R functions for running PROSPECT family of leaf radiative transfer models
-Version: 0.85
-Date: 2013-02-23
+Version: 0.86
+Date: 2013-05-07
 Author: Shawn P. Serbin
 Maintainer: Shawn P. Serbin <serbin@wisc.edu>
 Description: A package containing R functions for running the PROSPECT family
     of leaf radiative transfer models (RTMs). This package also includes
-    functions for inverting the PROSPECT models with measured spectra to obtain
-    estimates of leaf parameters (e.g. Chlorophyll, leaf mass per area).
+    functions for inverting the PROSPECT models with measured reflectance and 
+    transmittance spectra (using the DEoptim algorithm) to obtain estimates of 
+    leaf parameters (e.g. Chlorophyll, leaf mass per area).
 Depends:
     gsl,
     DEoptim,
