@@ -6,8 +6,7 @@ R functions for running PROSPECT family of leaf radiative transfer models
 
 
 
-Some Example Code For Using the Library:
-
+#Some Example Code For Using the Library:
 
 Run PROSPECT-4
 LRT <- prospect4(2,65,0.004,0.002)
