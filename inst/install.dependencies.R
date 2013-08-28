@@ -1,6 +1,7 @@
 #
 # Install package depends
 #
+# on unix/linx need to install gsl-bin and libgsl0-dev prior to R gsl package
 #
 list.of.packages <- c('gsl','DEoptim','testthat','snowfall','doSNOW') 
 
