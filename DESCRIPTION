@@ -1,8 +1,8 @@
 Package: Rprospect
 Type: Package
 Title: R functions for running PROSPECT family of leaf radiative transfer models
-Version: 0.86
-Date: 2013-05-07
+Version: 0.87
+Date: 2013-09-30
 Author: Shawn P. Serbin
 Maintainer: Shawn P. Serbin <serbin@wisc.edu>
 Description: A package containing R functions for running the PROSPECT family
