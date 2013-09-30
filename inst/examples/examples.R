@@ -70,9 +70,20 @@ tran <- spectra[,3]
 inv = invprospect(refl,tran,model=4,method="DEoptim",strategy=2,threshold=0.01,cpus=4)
 plot.prospect.inv(inv,outdir=output.dir,file='test_prospect.inv4')
 
+
 ## PROSPECT-5
 inv = invprospect(refl,tran,model=5,"DEoptim",strategy=2,threshold=0.01,cpus=4)
 plot.prospect.inv(inv,outdir=output.dir,file='test_prospect.inv5')
+
+
+
+
+
+
+# UPDATED
+inv = invprospect(refl,tran,model=4,method="DEoptim",strategy=2,threshold=0.01,cpus=4)
+plot.prospect.inv(inv,outdir=output.dir,file='test_prospect.inv4')
+
 #--------------------------------------------------------------------------------------------------#
 
 ### end of file

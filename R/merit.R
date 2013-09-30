@@ -2,7 +2,8 @@
 ##'
 ##' @name merit.p4
 ##' @title Merit function for inverting PROSPECT-4 on observed leaf reflectance and transmittance data
-##'
+##' 
+##' @export
 ##'
 ##' @author Shawn Serbin
 merit.p4 <- function(x){
