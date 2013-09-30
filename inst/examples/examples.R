@@ -1,7 +1,7 @@
 ####################################################################################################
 # R-PROSPECT Examples
 #
-# Last Updated: 05/07/2013 by SPS
+# Last Updated: 09/30/2013 by SPS
 ####################################################################################################
 
 
@@ -46,11 +46,11 @@ plot(LRT[,1],LRT[,2],type="l",xlab="Wavelength (nm)",
 ## Example PROSPECT Inversion
 
 ## Load test data
-poplar <- read.table(file=paste(.path.package("Rprospect"),"/extdata/poplar.txt",sep=""),
+poplar <- read.table(file=paste(path.package("Rprospect"),"/extdata/poplar.txt",sep=""),
                      header=T)   # test poplar dataset
-clover <- read.table(file=paste(.path.package("Rprospect"),"/extdata/clover.txt",sep=""),
+clover <- read.table(file=paste(path.package("Rprospect"),"/extdata/clover.txt",sep=""),
                      header=T)   # test clover dataset
-beech <- read.table(file=paste(.path.package("Rprospect"),"/extdata/beech.txt",sep=""),
+beech <- read.table(file=paste(path.package("Rprospect"),"/extdata/beech.txt",sep=""),
                      header=T)   # test beech dataset
 
 # Choose spec sample to invert
