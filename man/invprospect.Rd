@@ -27,7 +27,7 @@
   inversion of PROSPECT (optional)}
 
   \item{type}{the type of cluster to run the parallel
-  inversion. Options: 'SOCK','MPI'.  Default: 'SOCK'.  Also
+  inversion. Options: 'SOCK','MPI'. Default: 'SOCK'.  Also
   see ?snowfall}
 }
 \value{

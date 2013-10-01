@@ -56,7 +56,10 @@ invprospect <- function(refl,tran,model,method,strategy,threshold,cpus,type){
   } else if (model=="5B"){
     stop("not implemented yet")
   }
-    
+  
+  # set the optimum number of NPs
+  NP <- 20*length(parm_min)
+  
   print(" ")
   print(" ")
   print("-------------------------------------------------------")
@@ -75,7 +78,7 @@ invprospect <- function(refl,tran,model,method,strategy,threshold,cpus,type){
     clusterExport(cl,list("refl","tran"))
     clusterEvalQ(cl,library(Rprospect,DEoptim))  # Have to define which libs to copy to nodes
     registerDoSNOW(cl)
-    DEctrl <- list(VTR=threshold,NP=40,F=0.7,CR=0.9,trace=5,itermax=5000, reltol=0.001,
+    DEctrl <- list(VTR=threshold,NP=NP,F=0.7,CR=0.9,trace=5,itermax=5000, reltol=0.001,
                    steptol=50,strategy=strategy,parallelType=2)
     print("------------------------------------------------------------------------------")
     print(" Optimization iterations:")
@@ -90,7 +93,7 @@ invprospect <- function(refl,tran,model,method,strategy,threshold,cpus,type){
     sfStop() # close open cluster
 
   } else {
-    DEctrl <- list(VTR=threshold,NP=40,F=0.8,CR=0.9,trace=5,itermax=5000, reltol=0.001,
+    DEctrl <- list(VTR=threshold,NP=NP,F=0.7,CR=0.9,trace=5,itermax=5000, reltol=0.001,
                    steptol=50,strategy=strategy)
     t1 <- Sys.time()
     #inv <- DEoptim(fn, lower=parm_min, upper=parm_max, DEctrl)
@@ -105,23 +108,28 @@ invprospect <- function(refl,tran,model,method,strategy,threshold,cpus,type){
   
   ### Provide inversion statistics
   print(" ")
-  print("------------------------------------------------------------------------------")
-  print(" Optimum parameters:")
-  print(paste("N: ",round(inv$optim$bestmem[1],3)," Cab: ",round(inv$optim$bestmem[2],3),
-              " Cw: ",round(inv$optim$bestmem[3],3)," Cm: ",round(inv$optim$bestmem[4],3),sep="")  )
   rmse <- inv$optim$bestval
   print(" Inversion info:")
   print(paste("RMSE: ", round(rmse,3)," Iterations: ",inv$optim$iter," Function evaluations: ",
               inv$optim$nfeval, sep=""))
   print(" ")
-  
-  ### Output 
-  mod.spec <- prospect4(inv$optim$bestmem[1],inv$optim$bestmem[2],inv$optim$bestmem[3],
-                        inv$optim$bestmem[4])
-  parms <- data.frame(N=inv$optim$bestmem[1], Cab=inv$optim$bestmem[2],Cw=inv$optim$bestmem[3],
-                      Cm=inv$optim$bestmem[4],Inv.RMSE=rmse,row.names="PROSPECT.Parameters")
+  print("--------------------------------------------------------------------------------------")
+  print(" Optimum parameters:")
+  if (model==4){
+    print(paste("N: ",round(inv$optim$bestmem[1],3)," Cab: ",round(inv$optim$bestmem[2],3),
+                " Cw: ",round(inv$optim$bestmem[3],3)," Cm: ",round(inv$optim$bestmem[4],3),sep=""))
+    ### Output 
+    mod.spec <- prospect4(inv$optim$bestmem[1],inv$optim$bestmem[2],inv$optim$bestmem[3],
+                          inv$optim$bestmem[4])
+    parms <- data.frame(N=inv$optim$bestmem[1], Cab=inv$optim$bestmem[2],Cw=inv$optim$bestmem[3],
+                        Cm=inv$optim$bestmem[4],Inv.RMSE=rmse,row.names="PROSPECT.Parameters")
+  } else if (model==5){
+    print("not yet implemented")
+  }
+  print(" ")
   output <- list(Parameters=parms,PROSPECT.Spectra=mod.spec,DEoptim.obj=inv)
-    
+  
+  invisible(output)
 } # End of function
 #==================================================================================================#
 
