@@ -46,15 +46,22 @@ plot(LRT[,1],LRT[,2],type="l",xlab="Wavelength (nm)",
 ## Example PROSPECT Inversion
 
 ## Load test data
-poplar <- read.table(file=paste(path.package("Rprospect"),"/extdata/poplar.txt",sep=""),
+poplar <- read.csv(file=paste(path.package("Rprospect"),"/extdata/poplar_leaf.csv",sep=""),
                      header=T)   # test poplar dataset
-clover <- read.table(file=paste(path.package("Rprospect"),"/extdata/clover.txt",sep=""),
+clover <- read.csv(file=paste(path.package("Rprospect"),"/extdata/clover_leaf.csv",sep=""),
                      header=T)   # test clover dataset
-beech <- read.table(file=paste(path.package("Rprospect"),"/extdata/beech.txt",sep=""),
+beech <- read.csv(file=paste(path.package("Rprospect"),"/extdata/beech_leaf.csv",sep=""),
                      header=T)   # test beech dataset
+corn <- read.csv(file=paste(path.package("Rprospect"),"/extdata/corn_leaf.csv",sep=""),
+                   header=T)   # test beech dataset
+acsa3.bottom <- read.csv(file=paste(path.package("Rprospect"),"/extdata/acsa3_bottom_leaf.csv",sep=""),
+                         header=T)   # test beech dataset
+acsa3.top <- read.csv(file=paste(path.package("Rprospect"),"/extdata/acsa3_top_leaf.csv",sep=""),
+                         header=T)   # test beech dataset
+
 
 # Choose spec sample to invert
-spectra = clover  # chosen spectra to invert
+spectra = acsa3.top  # chosen spectra to invert
 
 # Plot R & T Spectra
 plot(spectra[,1],spectra[,2],type="l",lwd=2.5,ylim=c(0,1))
@@ -67,7 +74,8 @@ refl <- spectra[,2]
 tran <- spectra[,3]
 
 ## PROSPECT-4
-inv = invprospect(refl,tran,model=4,method="DEoptim",strategy=2,threshold=0.01,cpus=4)
+inv = invprospect(refl,tran,model=4,data.type="single",method="DEoptim",method.control=list(VTR=0.1,NP=50,trace=10,strategy=2),
+                  cpus=2,cluster.type='SOCK')
 plot.prospect.inv(inv,outdir=output.dir,file='test_prospect.inv4')
 
 
